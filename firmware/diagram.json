@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "author": "Isaac Vargas Moya",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": { "cpuFrequency": "1" }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -50,
+      "left": -180,
+      "attrs": { "delayTime": "20", "inhibitTime": "1.2" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": 0,
+      "left": 200,
+      "attrs": { "horn": "single" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 190,
+      "left": 210,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 260,
+      "left": 180,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "pir1:OUT", "esp:2", "green", [] ],
+    [ "servo1:PWM", "esp:13", "orange", [] ],
+    [ "esp:5", "r1:1", "blue", [] ],
+    [ "r1:2", "led1:A", "blue", [] ],
+    [ "pir1:VCC", "esp:3V3", "red", [] ],
+    [ "servo1:V+", "esp:3V3", "red", [] ],
+    [ "pir1:GND", "esp:GND.1", "black", [] ],
+    [ "servo1:GND", "esp:GND.1", "black", [] ],
+    [ "led1:C", "esp:GND.1", "black", [] ]
+  ],
+  "serialMonitor": { "display": "always", "newline": "lf" },
+  "dependencies": {}
+}
